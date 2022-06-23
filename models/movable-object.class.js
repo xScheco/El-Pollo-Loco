@@ -12,9 +12,11 @@ class MovableObject {
 
     moveRight() {
         console.log('moving right');
+        world.character.x += world.character.speed
+
     }
 
     moveleft() {
-
+        world.character.x -= world.character.speed
     }
 }
