@@ -1,11 +1,10 @@
 let canvas;
 let world;
-
+let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas);
-
+    world = new World(canvas, keyboard);
     console.log('my character is ', world.character);
 }
 
@@ -13,21 +12,19 @@ function init() {
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
         case "ArrowLeft":
-            console.log(e.key)
-            world.character.moveleft();
+            keyboard.LEFT = true;
             break;
         case "ArrowRight":
-            // keyboard.RIGHT = true;
-            world.character.moveRight();
+            keyboard.RIGHT = true;
             break;
         case "ArrowUp":
-            // keyboard.UP = true;
+            keyboard.UP = true;
             break;
         case "d":
-            // keyboard.D = true;
+            keyboard.D = true;
             break;
         case " ":
-            // keyboard.SPACE = true;
+            keyboard.SPACE = true;
             break;
     }
 });
@@ -35,19 +32,19 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     switch (e.key) {
         case "ArrowLeft":
-            // keyboard.LEFT = false;
+            keyboard.LEFT = false;
             break;
         case "ArrowRight":
-            // keyboard.RIGHT = false;
+            keyboard.RIGHT = false;
             break;
         case "ArrowUp":
-            // keyboard.UP = false;
+            keyboard.UP = false;
             break;
         case "ArrowDown":
-            // keyboard.D = false;
+            keyboard.D = false;
             break;
         case " ":
-            // keyboarD.SPACE = false;
+            keyboard.SPACE = false;
             break;
     }
 });
