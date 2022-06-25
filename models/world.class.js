@@ -24,6 +24,8 @@ class World {
         this.ctx.translate(this.camera_x, 0); // background wird nach rechts verschoben wenn der Character nach rechts läuft
         this.addObjectsToMap(this.level.backgroundObject);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.bottle);
+        this.addObjectsToMap(this.level.coin);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0); // background  wird nach links verschoben wenn der Character nach links läuft
