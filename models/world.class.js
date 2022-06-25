@@ -1,42 +1,8 @@
 class World {
     character = new Character();
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-    ];
-    clouds = [
-        new Cloud(),
-        new Cloud(),
-        new Cloud(),
-    ];
-    backgroundObject = [
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719), // 0 = x-achse
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', -719),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', -719),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', -719),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 0), // 0 = x-achse
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 0),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 0),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719), // 720 = x-achse
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 1438), // 720 = x-achse
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/1.png', 1438),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/1.png', 1438),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/1.png', 1438),
-
-        new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', 719 * 3), // 720 = x-achse
-        new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', 719 * 3),
-        new BackgroundObject('img/5.Fondo/Capas/2.Fondo2/2.png', 719 * 3),
-        new BackgroundObject('img/5.Fondo/Capas/1.suelo-fondo1/2.png', 719 * 3)
-
-    ]
+    enemies = level1.enemies;
+    clouds = level1.clouds;
+    backgroundObject = level1.backgroundObject;
     canvas;
     ctx;
     keyboard;
@@ -57,12 +23,12 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.translate(this.camera_x, 0); // background wird um 100px nach links verschoben
+        this.ctx.translate(this.camera_x, 0); // background wird nach rechts verschoben wenn der Character nach rechts läuft
         this.addObjectsToMap(this.backgroundObject);
         this.addObjectsToMap(this.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
-        this.ctx.translate(-this.camera_x, 0); // background wird um 100px wieder nach rechts verschoben
+        this.ctx.translate(-this.camera_x, 0); // background  wird nach links verschoben wenn der Character nach links läuft
 
 
 
