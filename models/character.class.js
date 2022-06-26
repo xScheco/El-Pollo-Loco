@@ -23,6 +23,22 @@ class Character extends MovableObject {
 
     ];
 
+    IMAGE_HURT = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-41.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-42.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/4.Herido/H-43.png',
+    ];
+
+    IMAGE_DEAD = [
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-51.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-52.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-53.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-54.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-55.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-57.png',
+    ];
+
     world;
     walking_sound = new Audio('audio/walking.mp3');
 
@@ -30,9 +46,11 @@ class Character extends MovableObject {
         super().loadImage('img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png');
         this.loadImages(this.IMAGE_WALKING);
         this.loadImages(this.IMAGE_JUMING);
+        this.loadImages(this.IMAGE_DEAD);
+        this.loadImages(this.IMAGE_HURT);
         this.animate();
         this.applyGravaity();
-    }
+    };
 
     animate() {
         setInterval(() => {
@@ -55,17 +73,25 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-
         setInterval(() => {
-            if (this.isAboveGround()) {
+
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGE_DEAD);
+                // this.dead();
+            } else if (this.isHurt()) {
+                this.playAnimation(this.IMAGE_HURT);
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGE_JUMING);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGE_WALKING);
                 }
             }
-
         }, 50);
+    };
+    dead() {
+        this.y += 8;
+        this.x += 5;
+        console.log(this.y);
     }
-
 }
