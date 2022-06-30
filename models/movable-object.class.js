@@ -1,11 +1,4 @@
-class MovableObject {
-    x = 120;
-    y = 50;
-    img;
-    height = 180;
-    width = 150;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -22,24 +15,7 @@ class MovableObject {
         }, 1000 / 60);
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
 
-    //         LÖCHEN        //
-    drawFrame(ctx) {
-        if (this.instanceofElement()) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-    instanceofElement() {
-            return this instanceof Character || this instanceof Chicken || this instanceof BabyChicken || this instanceof Bottle || this instanceof Coin || this instanceof Endboss
-        }
-        // ********************** //
 
     //  charcater.isColliding(chicken)
     isColliding(mo) {
@@ -71,18 +47,6 @@ class MovableObject {
         return this.y < 250;
     }
 
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
 
     moveRight() {
         this.x += this.speed;

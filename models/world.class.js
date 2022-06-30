@@ -5,6 +5,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    lifeBar = new LifeBar();
+    bottleBar = new BottleBar();
+    coinBar = new CoinBar();
 
 
     constructor(canvas, keyboard) {
@@ -25,6 +28,7 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
+                    this.lifeBar.setPercentage(this.character.energy);
                 }
             })
         }, 100);
@@ -33,9 +37,16 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+
         this.ctx.translate(this.camera_x, 0); // background wird nach rechts verschoben wenn der Character nach rechts läuft
         this.addObjectsToMap(this.level.backgroundObject);
         this.addObjectsToMap(this.level.clouds);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.lifeBar);
+        this.addToMap(this.bottleBar);
+        this.addToMap(this.coinBar);
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.bottle);
         this.addObjectsToMap(this.level.coin);
         this.addToMap(this.character);
