@@ -28,26 +28,6 @@ class LifeBar extends DrawableObject {
 
 
     resolveImageIndex() {
-        // switch (this.percentage) {
-        //     case '100':
-        //         return 5;
-        //         break;
-        //     case '> 80':
-        //         return 4;
-        //         break;
-        //     case '> 60':
-        //         return 3;
-        //         break;
-        //     case '> 40':
-        //         return 2;
-        //         break;
-        //     case '> 20':
-        //         return 1;
-        //         break;
-        //     default:
-        //         return 0;
-        //         break;
-        // }
         if (this.percentage == 100) {
             return 5;
         } else if (this.percentage > 80) {

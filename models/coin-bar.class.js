@@ -7,7 +7,7 @@ class CoinBar extends DrawableObject {
         'img/7.Marcadores/Barra/Marcador moneda/azul/80_.png',
         'img/7.Marcadores/Barra/Marcador moneda/azul/100_.png',
     ];
-
+    coins = 0;
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -15,7 +15,30 @@ class CoinBar extends DrawableObject {
         this.y = 80;
         this.height = 50;
         this.width = 160;
-        let path = this.IMAGES[0];
+        this.setCoinBar();
+    }
+
+    collectCoin() {
+        this.coins += 1;
+    }
+
+    setCoinBar() {
+        let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
+    }
+
+    resolveImageIndex() {
+        if (this.coins == 5) {
+            return 5;
+        } else if (this.coins == 4) {
+            return 4;
+        } else if (this.coins == 3) {
+            return 3;
+        } else if (this.coins == 2) {
+            return 2;
+        } else if (this.coins == 1) {
+            return 1;
+        } else {}
+        return 0;
     }
 }

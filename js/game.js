@@ -46,5 +46,8 @@ window.addEventListener('keyup', (e) => {
         case " ":
             keyboard.SPACE = false;
             break;
+        case "d":
+            keyboard.D = false;
+            break;
     }
 });

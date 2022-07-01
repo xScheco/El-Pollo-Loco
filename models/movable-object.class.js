@@ -25,6 +25,14 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height
     }
 
+    isAboveGround() {
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.y < 250;
+        }
+    }
+
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -43,9 +51,7 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    isAboveGround() {
-        return this.y < 250;
-    }
+
 
 
     moveRight() {
