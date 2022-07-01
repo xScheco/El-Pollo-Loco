@@ -9,6 +9,7 @@ class World {
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObject = [];
+    amountsBottles = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -31,9 +32,11 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && this.amountsBottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y);
             this.throwableObject.push(bottle);
+            this.amountsBottles--;
+            console.log(this.amountsBottles);
         }
     }
 
@@ -68,6 +71,7 @@ class World {
         this.level.bottle.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.level.bottle.splice(index, 1);
+                this.amountsBottles++;
                 this.bottleBar.collectBottle();
                 this.bottleBar.setBottleBar();
                 console.log('Bottles: ' + this.bottleBar.bottles)
