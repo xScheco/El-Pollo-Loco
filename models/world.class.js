@@ -39,8 +39,11 @@ class World {
 
     checkCollisions() {
         this.checkCollisionEnemy();
+        this.checkCollisionBottle();
         this.checkCollisionCoin();
+
     }
+
     checkCollisionEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
@@ -49,13 +52,25 @@ class World {
             }
         })
     }
+
     checkCollisionCoin() {
         this.level.coin.forEach((coins, index) => {
             if (this.character.isColliding(coins)) {
                 this.level.coin.splice(index, 1);
                 this.coinBar.collectCoin();
-                this.coinBar.setCoinBar(this.coinBar.collectedCoins);
-                console.log(this.coinBar.coins);
+                this.coinBar.setCoinBar();
+                console.log('Coins: ' + this.coinBar.coins); // Auf den End Screen anzeigen als Punkte zahl 
+            };
+        });
+    }
+
+    checkCollisionBottle() {
+        this.level.bottle.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                this.level.bottle.splice(index, 1);
+                this.bottleBar.collectBottle();
+                this.bottleBar.setBottleBar();
+                console.log('Bottles: ' + this.bottleBar.bottles)
             };
         });
     }
