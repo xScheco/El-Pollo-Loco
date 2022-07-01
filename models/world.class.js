@@ -9,7 +9,6 @@ class World {
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
     throwableObject = [];
-    amountsBottles = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -32,11 +31,11 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.D && this.amountsBottles > 0) {
+        if (this.keyboard.D && this.bottleBar.bottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y);
             this.throwableObject.push(bottle);
-            this.amountsBottles--;
-            console.log(this.amountsBottles);
+            this.bottleBar.bottles--; // verringert die Anzahl an Werfbaren Flaschen
+            this.bottleBar.setBottleBar();
         }
     }
 
@@ -44,14 +43,16 @@ class World {
         this.checkCollisionEnemy();
         this.checkCollisionBottle();
         this.checkCollisionCoin();
+        // this.checkbottle();
 
     }
 
     checkCollisionEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
+                this.character.hit(5);
                 this.lifeBar.setPercentage(this.character.energy);
+                console.log(this.character.energy);
             }
         })
     }
@@ -91,11 +92,13 @@ class World {
         this.addToMap(this.bottleBar);
         this.addToMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.bottle);
         this.addObjectsToMap(this.throwableObject);
         this.addObjectsToMap(this.level.coin);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
+
         this.ctx.translate(-this.camera_x, 0); // background  wird nach links verschoben wenn der Character nach links läuft
 
 

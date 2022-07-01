@@ -1,6 +1,4 @@
 class BottleBar extends DrawableObject {
-    percentage = 0;
-
     IMAGES = [
         'img/7.Marcadores/Barra/Marcador_botella/Azul/0_.png',
         'img/7.Marcadores/Barra/Marcador_botella/Azul/20_.png',
