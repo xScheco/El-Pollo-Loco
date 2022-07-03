@@ -1,3 +1,12 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.d-none {
+    display: none !important;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -6,4 +15,46 @@
 
 canvas {
     background-color: black;
+}
+
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.bg-start {
+    background: url(img/Opci¢n\ 1.png);
+}
+
+.bg-gameover {
+    background: url(img/9.Outro/gameover/1.you\ lost.png);
+}
+
+.screen {
+    background-size: cover;
+    width: 720px;
+    height: 480px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 20px;
+}
+
+.start-button {
+    padding: 10px;
+    background-color: #ffce16;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: #ffc800;
 }

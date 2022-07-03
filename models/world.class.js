@@ -26,10 +26,15 @@ class World {
     run() {
         setInterval(() => {
             this.checkThrowObjects();
-            this.checkCollisions();
+            this.checkCollisionEnemy();
+            this.checkCollisionBottle();
+            this.checkCollisionCoin();
         }, 100);
-    }
 
+        setInterval(() => {
+            this.bottleWithEndboss();
+        }, 200);
+    }
     checkThrowObjects() {
         if (this.keyboard.D && this.bottleBar.bottles > 0) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y);
@@ -39,22 +44,25 @@ class World {
         }
     }
 
-    checkCollisions() {
-        this.checkCollisionEnemy();
-        this.checkCollisionBottle();
-        this.checkCollisionCoin();
-        // this.checkbottle();
-
-    }
-
     checkCollisionEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit(5);
                 this.lifeBar.setPercentage(this.character.energy);
-                console.log(this.character.energy);
             }
         })
+    }
+
+    checkCollisionBottle() {
+        this.level.bottle.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                this.level.bottle.splice(index, 1);
+                this.amountsBottles++;
+                this.bottleBar.collectBottle();
+                this.bottleBar.setBottleBar();
+                console.log('Bottles: ' + this.bottleBar.bottles)
+            };
+        });
     }
 
     checkCollisionCoin() {
@@ -68,15 +76,14 @@ class World {
         });
     }
 
-    checkCollisionBottle() {
-        this.level.bottle.forEach((bottle, index) => {
-            if (this.character.isColliding(bottle)) {
-                this.level.bottle.splice(index, 1);
-                this.amountsBottles++;
-                this.bottleBar.collectBottle();
-                this.bottleBar.setBottleBar();
-                console.log('Bottles: ' + this.bottleBar.bottles)
-            };
+    bottleWithEndboss() {
+        this.throwableObject.forEach(bottle => {
+            if (this.level.endboss[0].isColliding(bottle)) {
+                this.level.endboss[0].hit(32.2);
+                this.level.endboss[0].endboss_dead = true;
+                console.log('endboss-engery: ', this.level.endboss[0].energy);
+            }
+
         });
     }
 

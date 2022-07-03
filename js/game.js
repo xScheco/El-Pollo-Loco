@@ -4,10 +4,13 @@ let keyboard = new Keyboard();
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-    console.log('my character is ', world.character);
 }
 
+function startGame() {
+    initLevel();
+    world = new World(canvas, keyboard);
+    document.getElementById('start').classList.add('d-none');
+}
 // is key press then 
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
@@ -51,3 +54,7 @@ window.addEventListener('keyup', (e) => {
             break;
     }
 });
+
+function restart() {
+    location.reload();
+}
